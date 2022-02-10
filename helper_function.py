@@ -260,6 +260,16 @@ def walk_through_dir(dir_path):
   """
   for dirpath, dirnames, filenames in os.walk(dir_path):
     print(f"There are {len(dirnames)} directories and {len(filenames)} images in '{dirpath}'.")
+
+# Make a function for preprocessing images
+def preprocess_img(image, label, img_shape=224):
+  """
+  Converts image datatype from 'uint8' -> 'float32' and reshapes image to
+  [img_shape, img_shape, color_channels]
+  """
+  image = tf.image.resize(image, [img_shape, img_shape]) # reshape to img_shape
+  return tf.cast(image, tf.float32), label # return (float32_image, label) tuple
+
     
 # Function to evaluate: accuracy, precision, recall, f1-score
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
