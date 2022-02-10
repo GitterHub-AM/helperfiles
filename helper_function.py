@@ -268,6 +268,7 @@ def preprocess_img(image, label, img_shape=224):
   [img_shape, img_shape, color_channels]
   """
   image = tf.image.resize(image, [img_shape, img_shape]) # reshape to img_shape
+  # image=image/255. # NOTE: scaling image values will be required on many models but not on EfficientNetBX models from tf.keras.applications
   return tf.cast(image, tf.float32), label # return (float32_image, label) tuple
 
     
